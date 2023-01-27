@@ -89,3 +89,4 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - assets/logoFarmFit.png
+    - assets/Cadastramento.png
