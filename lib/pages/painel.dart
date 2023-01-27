@@ -1,52 +1,62 @@
-import 'dart:ui';
-import 'package:google_nav_bar/google_nav_bar.dart';
-
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:intl/intl.dart';
 
-class homescreen extends StatelessWidget {
+class painel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return appbar();
   }
 }
 
-class conteudopagina1 extends StatelessWidget {
+class conteudopainel extends StatelessWidget {
+  String cdate1 = DateFormat("EEEEE, dd, yyyy").format(DateTime.now());
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(padding: EdgeInsets.all(10)),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Text(
-                "Seja bem vindo, ",
-                style: TextStyle(
-                    fontSize: 19, fontFamily: 'Inter', color: Colors.white),
+        Padding(padding: EdgeInsets.all(40)),
+        Expanded(
+          child: Stack(
+            children: [
+              SizedBox(
+                height: 670,
+                width: double.infinity,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
+                  ),
+                ),
               ),
-            ),
-            Padding(padding: EdgeInsets.all(1)),
-            Text(
-              "Agricultor",
-              style: TextStyle(
-                  fontSize: 19,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-            ),
-          ],
-        ),
-        Padding(padding: EdgeInsets.all(15)),
-        Container(
-          height: 188,
-          width: 252,
-          decoration: BoxDecoration(
-            color: Color(0xFF64B0FD),
-            borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-              image: AssetImage("assets/logoFarmFit.png"),
-            ),
+              Padding(padding: EdgeInsets.all(30)),
+              SizedBox(
+                height: 41,
+                width: double.infinity,
+                child: Container(
+                  child: Center(
+                    child: Text(
+                      cdate1,
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                        fontFamily: 'Inter',
+                      ),
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],
@@ -98,7 +108,7 @@ class _appbarState extends State<appbar> {
         ),
       ),
       backgroundColor: Color(0xFF035AA6),
-      body: conteudopagina1(),
+      body: conteudopainel(),
       appBar: AppBar(
         elevation: 0,
         title: Center(
