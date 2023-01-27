@@ -71,7 +71,7 @@ class loginScreen extends StatelessWidget {
             TextButton(
               onPressed: () {
                 if (email == "adm" && senha == "adm")
-                  Navigator.popAndPushNamed(context, "HomeScreen");
+                  Navigator.popAndPushNamed(context, "homescreen");
                 else
                   print("Usuário ou senha incorretos.");
               },

@@ -1,4 +1,5 @@
 import 'package:farmfitmobile/pages/formsScreen.dart';
+import 'package:farmfitmobile/pages/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:farmfitmobile/pages/loginScreen.dart';
 import 'package:farmfitmobile/pages/formsScreen.dart';
@@ -17,6 +18,7 @@ class Aplicativo extends StatelessWidget {
       routes: {
         "/": (context) => loginScreen(),
         "formulario": (context) => formulario(),
+        "homescreen": (context) => homescreen(),
       },
     );
   }
