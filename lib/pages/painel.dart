@@ -56,10 +56,50 @@ class conteudopainel extends StatelessWidget {
                   ),
                 ),
               ),
+              
+              dados(),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+class dados extends StatefulWidget {
+  @override
+  State<dados> createState() => _dadosState();
+}
+
+class _dadosState extends State<dados> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          Padding(padding: EdgeInsets.all(25)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.cloud_circle,
+                size: 70,
+              ),
+              Text(
+                "Clima",
+                style: TextStyle(
+                  fontSize: 40,
+                  color: Colors.black,
+                  fontFamily: 'Inter',
+                ),
+              ),
+            ],
+          ),
+          Container(
+            child: Icon(Icons.cloudy_snowing),
+          ),
+          Container(),
+        ],
+      ),
     );
   }
 }
