@@ -1,16 +1,9 @@
-# farmfitmobile
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div style="display: inline_block" align="center">
+  <h1>FarmFit - Aplicativo Mobile.</h1>
+  
+  <p align="center">Hey, Agricultor! 🌎</p>
+  <p>Este é um repositório exclusivo para o aplicativo do FarmFit. Este projeto foi desenvolvido no Programa de férias da Flextronics Instituto de Tecnologia (FIT).</p>
+  
+  
+  <img height="500em" src=""/> 
+</div>
