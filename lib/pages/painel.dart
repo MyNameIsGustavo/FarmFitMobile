@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:intl/intl.dart';
+import 'package:farmfitmobile/pages/proximas_temperaturas.dart';
+import 'package:farmfitmobile/services/previsao_service.dart';
+import 'package:farmfitmobile/models/previsao_hora.dart';
 
 class painel extends StatelessWidget {
   @override
@@ -56,7 +59,6 @@ class conteudopainel extends StatelessWidget {
                   ),
                 ),
               ),
-              
               dados(),
             ],
           ),
@@ -65,12 +67,23 @@ class conteudopainel extends StatelessWidget {
     );
   }
 }
+
 class dados extends StatefulWidget {
+  const dados({Key? key}) : super(key: key);
   @override
   State<dados> createState() => _dadosState();
 }
 
 class _dadosState extends State<dados> {
+  late List<PrevisaoHora> ultimasPrevisoes;
+
+  @override
+  void initState() {
+    super.initState();
+    PrevisaoService service = PrevisaoService();
+    ultimasPrevisoes = service.recuperarUltimasPrevisoes();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -97,7 +110,7 @@ class _dadosState extends State<dados> {
           Container(
             child: Icon(Icons.cloudy_snowing),
           ),
-          Container(),
+          Container(child: ProximasTemperaturas(previsoes: ultimasPrevisoes)),
         ],
       ),
     );

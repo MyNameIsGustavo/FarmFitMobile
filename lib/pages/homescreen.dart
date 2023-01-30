@@ -1,6 +1,6 @@
 import 'dart:ui';
+import 'package:farmfitmobile/pages/proximas_temperaturas.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
 import 'package:flutter/material.dart';
 
 class homescreen extends StatelessWidget {
