@@ -1,4 +1,5 @@
 import 'package:farmfitmobile/pages/contants.dart';
+import 'package:farmfitmobile/pages/painel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:intl/intl.dart';
@@ -7,14 +8,14 @@ import 'package:farmfitmobile/services/previsao_service.dart';
 import 'package:farmfitmobile/models/previsao_hora.dart';
 import 'package:flutter/foundation.dart';
 
-class painel extends StatelessWidget {
+class painelhumidade extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return appbar();
+    return appbar2();
   }
 }
 
-class conteudopainel extends StatelessWidget {
+class conteudopainel2 extends StatelessWidget {
   String cdate1 = DateFormat("EEEEE, dd, yyyy").format(DateTime.now());
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ class conteudopainel extends StatelessWidget {
                   ),
                 ),
               ),
-              dados(),
+              dados2(),
             ],
           ),
         ),
@@ -71,79 +72,13 @@ class conteudopainel extends StatelessWidget {
   }
 }
 
-
-class cabecalho extends StatefulWidget {
+class dados2 extends StatefulWidget {
+  const dados2({Key? key}) : super(key: key);
   @override
-  State<cabecalho> createState() => _cabecalhoState();
+  State<dados2> createState() => _dados2State();
 }
 
-class _cabecalhoState extends State<cabecalho> {
-  int selectedCategory = 0;
-  List<String> categories = ["Clima", "Humidade do solo", "Coming soon"];
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Container(
-        height: 60,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          itemBuilder: (context, index) => buildCategory(index, context),
-        ),
-      ),
-    );
-  }
-
-  Padding buildCategory(int index, BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-      child: GestureDetector(
-        onTap: (() {
-          setState(() {
-            selectedCategory = index;
-            if (selectedCategory == 1) {
-              Navigator.popAndPushNamed(context, "painelhumidade");
-            } else if (selectedCategory == 2) {
-              Navigator.popAndPushNamed(context, "/");
-            }
-          });
-        }),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              categories[index],
-              style: Theme.of(context).textTheme.headline5?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: index == selectedCategory
-                        ? kTextColor
-                        : Colors.black.withOpacity(0.4),
-                  ),
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(vertical: kDefaultPadding / 2),
-              height: 6,
-              width: 48,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: index == selectedCategory
-                    ? kSecondaryColor
-                    : Colors.transparent,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-class dados extends StatefulWidget {
-  const dados({Key? key}) : super(key: key);
-  @override
-  State<dados> createState() => _dadosState();
-}
-class _dadosState extends State<dados> {
+class _dados2State extends State<dados2> {
   late List<PrevisaoHora> ultimasPrevisoes;
   @override
   void initState() {
@@ -157,41 +92,32 @@ class _dadosState extends State<dados> {
     return Container(
       child: Column(
         children: [
-          
           Padding(padding: EdgeInsets.all(20)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.cloud_circle,
-                size: 70,
-              ),
               Text(
-                "Clima",
+                "Humidade do solo",
                 style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 30,
                   color: Colors.black,
                   fontFamily: 'Inter',
                 ),
               ),
             ],
           ),
-          Container(
-            child: Icon(Icons.cloudy_snowing),
-          ),
-          Container(child: ProximasTemperaturas(previsoes: ultimasPrevisoes)),
         ],
       ),
     );
   }
 }
 
-class appbar extends StatefulWidget {
+class appbar2 extends StatefulWidget {
   @override
-  State<appbar> createState() => _appbarState();
+  State<appbar2> createState() => _appbar2State();
 }
 
-class _appbarState extends State<appbar> {
+class _appbar2State extends State<appbar2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -230,7 +156,7 @@ class _appbarState extends State<appbar> {
         ),
       ),
       backgroundColor: Color(0xFF035AA6),
-      body: conteudopainel(),
+      body: conteudopainel2(),
       appBar: AppBar(
         elevation: 0,
         title: Center(
@@ -244,5 +170,3 @@ class _appbarState extends State<appbar> {
     );
   }
 }
-
-
