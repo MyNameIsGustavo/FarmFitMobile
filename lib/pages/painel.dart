@@ -1,9 +1,11 @@
+import 'package:farmfitmobile/pages/contants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:farmfitmobile/pages/proximas_temperaturas.dart';
 import 'package:farmfitmobile/services/previsao_service.dart';
 import 'package:farmfitmobile/models/previsao_hora.dart';
+import 'package:flutter/foundation.dart';
 
 class painel extends StatelessWidget {
   @override
@@ -18,7 +20,8 @@ class conteudopainel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(padding: EdgeInsets.all(40)),
+        cabecalho(),
+        Padding(padding: EdgeInsets.all(10)),
         Expanded(
           child: Stack(
             children: [
@@ -73,10 +76,75 @@ class dados extends StatefulWidget {
   @override
   State<dados> createState() => _dadosState();
 }
+class cabecalho extends StatefulWidget {
+  @override
+  State<cabecalho> createState() => _cabecalhoState();
+}
+
+class _cabecalhoState extends State<cabecalho> {
+  int selectedCategory = 0;
+  List<String> categories = ["Clima", "Humidade do solo", "Coming soon"];
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Container(
+        height: 60,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: categories.length,
+          itemBuilder: (context, index) => buildCategory(index, context),
+        ),
+      ),
+    );
+  }
+
+  Padding buildCategory(int index, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      child: GestureDetector(
+        onTap: (() {
+          setState(() {
+            selectedCategory = index;
+            if (selectedCategory == 1) {
+              Navigator.popAndPushNamed(context, "homescreen");
+            } else if (selectedCategory == 2) {
+              Navigator.popAndPushNamed(context, "/");
+            }
+          });
+        }),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              categories[index],
+              style: Theme.of(context).textTheme.headline5?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: index == selectedCategory
+                        ? kTextColor
+                        : Colors.black.withOpacity(0.4),
+                  ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: kDefaultPadding / 2),
+              height: 6,
+              width: 48,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: index == selectedCategory
+                    ? kSecondaryColor
+                    : Colors.transparent,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class _dadosState extends State<dados> {
   late List<PrevisaoHora> ultimasPrevisoes;
-
   @override
   void initState() {
     super.initState();
@@ -89,7 +157,8 @@ class _dadosState extends State<dados> {
     return Container(
       child: Column(
         children: [
-          Padding(padding: EdgeInsets.all(25)),
+          
+          Padding(padding: EdgeInsets.all(20)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -175,3 +244,5 @@ class _appbarState extends State<appbar> {
     );
   }
 }
+
+

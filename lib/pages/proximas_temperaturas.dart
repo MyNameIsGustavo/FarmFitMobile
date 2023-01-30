@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:farmfitmobile/models/previsao_hora.dart';
+import 'package:http/http.dart' as http;
 
 class ProximasTemperaturas extends StatelessWidget {
   final List<PrevisaoHora> previsoes;
@@ -36,3 +39,5 @@ class ProximasTemperaturas extends StatelessWidget {
     );
   }
 }
+
+
