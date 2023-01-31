@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:farmfitmobile/pages/contants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -6,7 +8,7 @@ import 'package:farmfitmobile/pages/proximas_temperaturas.dart';
 import 'package:farmfitmobile/services/previsao_service.dart';
 import 'package:farmfitmobile/models/previsao_hora.dart';
 import 'package:flutter/foundation.dart';
-
+import 'package:http/http.dart' as http;
 class painel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -71,15 +73,37 @@ class conteudopainel extends StatelessWidget {
   }
 }
 
+Future<void> getWeather() async {
+  try {
+    final uri = Uri.parse(
+        "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=410e55f7cd4e665ba787426f0022ea6d");
+    final response = await http.get(uri);
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+      var temperature = data["main"]["temp"];
+      print("A temperatura em Londres é de $temperature graus Celsius.");
+    } else {
+      print("Erro ao obter dados do clima");
+    }
+  } catch (e) {
+    print("Erro ao fazer a requisição: $e");
+  }
+}
+
+int? test = 0;
 
 class cabecalho extends StatefulWidget {
+  int? selecionado = 0;
+  cabecalho({this.selecionado});
   @override
   State<cabecalho> createState() => _cabecalhoState();
 }
 
 class _cabecalhoState extends State<cabecalho> {
-  int selectedCategory = 0;
-  List<String> categories = ["Clima", "Humidade do solo", "Coming soon"];
+  int? selectedCategory = 0;
+
+  List<String> categories = ["Clima", "Umidade do solo", "Coming soon"];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -103,9 +127,12 @@ class _cabecalhoState extends State<cabecalho> {
           setState(() {
             selectedCategory = index;
             if (selectedCategory == 1) {
+              selectedCategory = 1;
               Navigator.popAndPushNamed(context, "painelhumidade");
             } else if (selectedCategory == 2) {
               Navigator.popAndPushNamed(context, "/");
+            } else {
+              Navigator.popAndPushNamed(context, "painel");
             }
           });
         }),
@@ -138,11 +165,13 @@ class _cabecalhoState extends State<cabecalho> {
     );
   }
 }
+
 class dados extends StatefulWidget {
   const dados({Key? key}) : super(key: key);
   @override
   State<dados> createState() => _dadosState();
 }
+
 class _dadosState extends State<dados> {
   late List<PrevisaoHora> ultimasPrevisoes;
   @override
@@ -157,7 +186,6 @@ class _dadosState extends State<dados> {
     return Container(
       child: Column(
         children: [
-          
           Padding(padding: EdgeInsets.all(20)),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -210,6 +238,7 @@ class _appbarState extends State<appbar> {
               GButton(
                 onPressed: () {
                   Navigator.popAndPushNamed(context, "homescreen");
+                  
                 },
                 icon: Icons.home,
                 text: 'Home',
@@ -222,10 +251,14 @@ class _appbarState extends State<appbar> {
                 text: 'Painel',
               ),
               GButton(
+                onPressed: () {
+                  getWeather();
+                },
                 icon: Icons.charging_station,
                 text: 'Painel',
               ),
             ],
+            selectedIndex: 1,
           ),
         ),
       ),
@@ -244,5 +277,3 @@ class _appbarState extends State<appbar> {
     );
   }
 }
-
-

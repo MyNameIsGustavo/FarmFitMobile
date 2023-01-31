@@ -83,6 +83,7 @@ class _appbarState extends State<appbar> {
                 text: 'Home',
               ),
               GButton(
+                active: true,
                 onPressed: () {
                   Navigator.popAndPushNamed(context, "painel");
                 },
@@ -93,7 +94,9 @@ class _appbarState extends State<appbar> {
                 icon: Icons.charging_station,
                 text: 'Painel',
               ),
+              
             ],
+            
           ),
         ),
       ),
