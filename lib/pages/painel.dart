@@ -9,6 +9,7 @@ import 'package:farmfitmobile/services/previsao_service.dart';
 import 'package:farmfitmobile/models/previsao_hora.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+
 class painel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -76,7 +77,7 @@ class conteudopainel extends StatelessWidget {
 Future<void> getWeather() async {
   try {
     final uri = Uri.parse(
-        "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=410e55f7cd4e665ba787426f0022ea6d");
+        "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=");
     final response = await http.get(uri);
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
@@ -238,7 +239,6 @@ class _appbarState extends State<appbar> {
               GButton(
                 onPressed: () {
                   Navigator.popAndPushNamed(context, "homescreen");
-                  
                 },
                 icon: Icons.home,
                 text: 'Home',
