@@ -45,7 +45,7 @@ class conteudopagina1 extends StatelessWidget {
             color: Color(0xFF64B0FD),
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
-              image: AssetImage("assets/logoFarmFit.png"),
+              image: AssetImage("images/logoFarmFit.png"),
             ),
           ),
         ),
