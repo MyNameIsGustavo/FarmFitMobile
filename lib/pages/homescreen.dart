@@ -43,12 +43,29 @@ class conteudopagina1 extends StatelessWidget {
           width: 252,
           decoration: BoxDecoration(
             color: Color(0xFF64B0FD),
+            border: Border.all(color: Colors.black),
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
+              
               image: AssetImage("images/logoFarmFit.png"),
             ),
           ),
         ),
+        Padding(padding: EdgeInsets.all(10)),
+        Center(
+          child: Container(
+            width: 320,
+            child: Text(
+              "   O nosso projeto tem como propósito ajudar os pequenos agricultores, através da capitação da água de chuva e automatizar a irrigação conforme a humidade do solo de suas plantações. Através disso, o agricultor poderá observar diversos tipos de dados neste aplicativo, como a humidade do solo de sua plantação e clima da região.",
+              textAlign: TextAlign.justify,
+              style: TextStyle(
+                fontSize: 19,
+                fontFamily: 'Inter',
+                color: Colors.white,
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
@@ -87,16 +104,14 @@ class _appbarState extends State<appbar> {
                 onPressed: () {
                   Navigator.popAndPushNamed(context, "painel");
                 },
-                icon: Icons.charging_station,
+                icon: Icons.analytics_outlined,
                 text: 'Painel',
               ),
               GButton(
-                icon: Icons.charging_station,
-                text: 'Painel',
+                icon: Icons.group,
+                text: 'Time',
               ),
-              
             ],
-            
           ),
         ),
       ),

@@ -78,7 +78,7 @@ class conteudopainel extends StatelessWidget {
 Future<void> getWeather() async {
   try {
     final uri = Uri.parse(
-        "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=");
+        "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=410e55f7cd4e665ba787426f0022ea6d");
     final response = await http.get(uri);
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
@@ -131,6 +131,7 @@ class _cabecalhoState extends State<cabecalho> {
             if (selectedCategory == 1) {
               selectedCategory = 1;
               Navigator.popAndPushNamed(context, "painelhumidade");
+              
             } else if (selectedCategory == 2) {
               Navigator.popAndPushNamed(context, "/");
             } else {
@@ -206,9 +207,7 @@ class _dadosState extends State<dados> {
               ),
             ],
           ),
-          Container(
-            child: Icon(Icons.cloudy_snowing),
-          ),
+          Padding(padding: EdgeInsets.all(10)),
           Container(child: ProximasTemperaturas(previsoes: ultimasPrevisoes)),
         ],
       ),
@@ -245,18 +244,16 @@ class _appbarState extends State<appbar> {
                 text: 'Home',
               ),
               GButton(
+                active: true,
                 onPressed: () {
                   Navigator.popAndPushNamed(context, "painel");
                 },
-                icon: Icons.charging_station,
+                icon: Icons.analytics_outlined,
                 text: 'Painel',
               ),
               GButton(
-                onPressed: () {
-                  getWeather();
-                },
-                icon: Icons.charging_station,
-                text: 'Painel',
+                icon: Icons.group,
+                text: 'Time',
               ),
             ],
             selectedIndex: 1,

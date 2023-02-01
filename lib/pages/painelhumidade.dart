@@ -92,9 +92,11 @@ class _dados2State extends State<dados2> {
     super.initState();
     PrevisaoService service = PrevisaoService();
     ultimasPrevisoes = service.recuperarUltimasPrevisoes();
+    conectar();
   }
 
   bool liga = false;
+  bool desabilitar = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -114,6 +116,7 @@ class _dados2State extends State<dados2> {
               ),
             ],
           ),
+          /*
           Switch(
               value: liga,
               onChanged: (value) {
@@ -122,8 +125,27 @@ class _dados2State extends State<dados2> {
                   conectar();
                 });
               }),
-          Text("Ligar MQTT"),
+              */
+
           Text("$valor"),
+          Padding(padding: EdgeInsets.all(10)),
+          Container(
+            height: 70,
+            width: 300,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: TextButton(
+              onPressed: (() {
+                Navigator.popAndPushNamed(context, "painelhumidade");
+              }),
+              child: Text(
+                "Clique aqui, caso servidor esteja fora do ar",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -272,6 +294,8 @@ class _dados2State extends State<dados2> {
     await MqttUtilities.asyncSleep(2);
     print('EXAMPLE::Disconnecting');
     client.disconnect();
+    valor = "Desconectado do servidor MQTT";
+    setState(() {});
     print('EXAMPLE::Exiting normally');
     return 0;
   }
@@ -341,15 +365,16 @@ class _appbar2State extends State<appbar2> {
                 text: 'Home',
               ),
               GButton(
+                active: true,
                 onPressed: () {
                   Navigator.popAndPushNamed(context, "painel");
                 },
-                icon: Icons.charging_station,
+                icon: Icons.analytics_outlined,
                 text: 'Painel',
               ),
               GButton(
-                icon: Icons.charging_station,
-                text: 'Painel',
+                icon: Icons.group,
+                text: 'Time',
               ),
             ],
             selectedIndex: 1,
