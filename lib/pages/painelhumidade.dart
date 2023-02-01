@@ -118,7 +118,6 @@ class _dados2State extends State<dados2> {
               value: liga,
               onChanged: (value) {
                 liga = value;
-
                 setState(() {
                   conectar();
                 });

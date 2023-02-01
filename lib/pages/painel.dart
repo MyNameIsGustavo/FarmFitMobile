@@ -8,6 +8,7 @@ import 'package:farmfitmobile/pages/proximas_temperaturas.dart';
 import 'package:farmfitmobile/services/previsao_service.dart';
 import 'package:farmfitmobile/models/previsao_hora.dart';
 import 'package:flutter/foundation.dart';
+import 'package:farmfitmobile/pages/painelhumidade.dart';
 import 'package:http/http.dart' as http;
 class painel extends StatelessWidget {
   @override
