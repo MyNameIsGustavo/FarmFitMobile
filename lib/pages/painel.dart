@@ -10,6 +10,7 @@ import 'package:farmfitmobile/models/previsao_hora.dart';
 import 'package:flutter/foundation.dart';
 import 'package:farmfitmobile/pages/painelhumidade.dart';
 import 'package:http/http.dart' as http;
+
 class painel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -239,7 +240,6 @@ class _appbarState extends State<appbar> {
               GButton(
                 onPressed: () {
                   Navigator.popAndPushNamed(context, "homescreen");
-                  
                 },
                 icon: Icons.home,
                 text: 'Home',
