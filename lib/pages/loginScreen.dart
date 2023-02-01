@@ -29,7 +29,7 @@ class loginScreen extends StatelessWidget {
             SizedBox(
               width: 450,
               height: 450,
-              child: Image.asset("assets/logoFarmFit.png"),
+              child: Image.asset("images/logoFarmFit.png"),
             ),
             Padding(padding: EdgeInsets.all(50)),
             TextField(
