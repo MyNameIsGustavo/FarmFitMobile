@@ -26,10 +26,19 @@ class loginScreen extends StatelessWidget {
         ),
         child: ListView(
           children: <Widget>[
-            SizedBox(
-              width: 450,
-              height: 450,
-              child: Image.asset("images/logoFarmFit.png"),
+            Container(
+              width: 188,
+              height: 252,
+              decoration: BoxDecoration(
+                color: Color(0xFF64B0FD),
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(20),
+                image: DecorationImage(
+                  image: AssetImage("images/logoFarmFit.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              
             ),
             Padding(padding: EdgeInsets.all(50)),
             TextField(
@@ -89,19 +98,7 @@ class loginScreen extends StatelessWidget {
                 padding: EdgeInsets.only(
               top: 25,
             )),
-            TextButton(
-              onPressed: () {
-                Navigator.popAndPushNamed(context, "formulario");
-              },
-              child: Text("Ainda não tenho cadastro.",
-                  style: TextStyle(color: Colors.white, fontSize: 18)),
-              style: TextButton.styleFrom(
-                fixedSize: Size(200, 50),
-                backgroundColor: Color.fromARGB(255, 0, 183, 255),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100)),
-              ),
-            ),
+            
           ],
         ),
       ),

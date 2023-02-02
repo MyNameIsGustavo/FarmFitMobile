@@ -19,7 +19,7 @@ class conteudotime extends StatelessWidget {
         Padding(padding: EdgeInsets.all(10)),
         Container(
           child: Text(
-            "Nosso time !",
+            "Equipe de desenvolvedores.",
             style: TextStyle(
                 fontSize: 25,
                 fontFamily: 'Inter',
@@ -27,10 +27,10 @@ class conteudotime extends StatelessWidget {
                 color: Colors.white),
           ),
         ),
-        Padding(padding: EdgeInsets.all(10)),
+       
         Center(
           child: Container(
-            height: 220,
+            height: 200,
             width: 350,
             margin: EdgeInsets.symmetric(
                 horizontal: kDefaultPadding, vertical: kDefaultPadding / 2),
@@ -41,6 +41,29 @@ class conteudotime extends StatelessWidget {
                 image: AssetImage("images/nossotime.jpg"),
                 fit: BoxFit.cover,
               ),
+            ),
+          ),
+        ),
+      
+        Container(
+          child: Text(
+            "Agradecimentos.",
+            style: TextStyle(
+                fontSize: 25,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
+          ),
+        ),
+        Container(
+          width: 320,
+          child: Text(
+            "   Primeiramente, gostaríamos de parabenizar todos os professores, instrutores e profissionais do FIT, que sempre nos auxiliaram, repassaram diversos conhecimentos na área de tecnologia e o principal, nos deram sede de aprendizado. Nestas quatro semanas, aprendemos sobre tecnologias, como o Flutter, um framework maravilhoso, que foi utilizado para realizar este aplicativo. Também, estudamos sobre cloud e IoT, onde aplicamos ambos em nosso projeto, sendo assim uma incrível experiência que levaremos para nossas vidas.",
+            textAlign: TextAlign.justify,
+            style: TextStyle(
+              fontSize: 19,
+              fontFamily: 'Inter',
+              color: Colors.white,
             ),
           ),
         ),
@@ -82,7 +105,7 @@ class _appbartimeState extends State<appbartime> {
                 onPressed: () {
                   Navigator.popAndPushNamed(context, "painel");
                 },
-                icon: Icons.analytics_outlined,
+                icon: Icons.analytics,
                 text: 'Painel',
               ),
               GButton(

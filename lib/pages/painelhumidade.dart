@@ -19,7 +19,7 @@ class painelhumidade extends StatelessWidget {
   }
 }
 
-String valor = "";
+String valor = "2";
 
 class conteudopainel2 extends StatelessWidget {
   String cdate1 = DateFormat("EEEEE, dd, yyyy").format(DateTime.now());
@@ -126,33 +126,52 @@ class _dados2State extends State<dados2> {
                 });
               }),
               */
-          Padding(padding: EdgeInsets.all(40)),
+          Padding(padding: EdgeInsets.all(60)),
           Container(
-              child: Text(
-            "$valor",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black,
-              fontFamily: 'Inter',
+            child: Text(
+              "Humidade $valor %",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontFamily: 'Inter',
+              ),
             ),
-          )),
-          Padding(padding: EdgeInsets.all(130)),
+          ),
           Container(
-            height: 70,
-            width: 300,
+            height: 60,
+            width: 100,
             decoration: BoxDecoration(
-              color: Colors.black,
+              border: Border.all(color: Colors.black),
+              borderRadius: BorderRadius.circular(20),
+              color: int.parse(valor) < 75
+                  ? Colors.red
+                  : int.parse(valor) > 75
+                      ? Colors.green
+                      : Colors.grey,
+            ),
+          ),
+          Padding(padding: EdgeInsets.all(2)),
+          Text("Cor vermelha = HUMIDADE BAIXA"),
+          Padding(padding: EdgeInsets.all(2)),
+          Text("Cor verde = HUMIDADE ALTA"),
+          Padding(padding: EdgeInsets.all(80)),
+          Container(
+            height: 50,
+            width: 100,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              border: Border.all(color: Colors.black),
               borderRadius: BorderRadius.circular(25),
             ),
             child: TextButton(
               onPressed: (() {
-                if (valor == "Desconectado do servidor MQTT") {
+                if (valor == "1") {
                   Navigator.popAndPushNamed(context, "painelhumidade");
                 }
               }),
               child: Text(
-                "Clique aqui, caso servidor esteja fora do ar",
-                style: TextStyle(color: Colors.white),
+                "Reload",
+                style: TextStyle(color: Colors.black),
               ),
             ),
           ),
@@ -210,8 +229,7 @@ class _dados2State extends State<dados2> {
     /// an example of a specific one below.
     final connMess = MqttConnectMessage()
         .withClientIdentifier('Mqtt_MyClientUniqueId')
-        .withWillTopic(
-            'willtopic') // If you set this you must set a will message
+        .withWillTopic('FarmFIT') // If you set this you must set a will message
         .withWillMessage('My Will message')
         .startClean() // Non persistent session for testing
         .withWillQos(MqttQos.atLeastOnce);
@@ -255,7 +273,12 @@ class _dados2State extends State<dados2> {
       final recMess = c![0].payload as MqttPublishMessage;
       final pt =
           MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-      valor = pt;
+      String teste;
+      teste = pt;
+      if (int.parse(teste) > 0 && int.parse(teste) < 110) {
+        valor = pt;
+      }
+      
       setState(() {});
 
       /// The above may seem a little convoluted for users only interested in the
@@ -279,12 +302,12 @@ class _dados2State extends State<dados2> {
     /// Lets publish to our topic
     /// Use the payload builder rather than a raw buffer
     /// Our known topic to publish to
-    const pubTopic = 'Dart/Mqtt_client/testtopic';
+    const pubTopic = 'FarmFIT';
     final builder = MqttClientPayloadBuilder();
     builder.addString('Hello from mqtt_client');
 
     /// Subscribe to it
-    print('EXAMPLE::Subscribing to the Dart/Mqtt_client/testtopic topic');
+    print('EXAMPLE::Subscribing to the FarmFIT topic');
     client.subscribe(pubTopic, MqttQos.exactlyOnce);
 
     /// Publish it
@@ -304,7 +327,8 @@ class _dados2State extends State<dados2> {
     await MqttUtilities.asyncSleep(2);
     print('EXAMPLE::Disconnecting');
     client.disconnect();
-    valor = "Desconectado do servidor MQTT";
+
+    valor = "1";
     setState(() {});
     print('EXAMPLE::Exiting normally');
     return 0;
@@ -444,7 +468,7 @@ class _cabecalho2State extends State<cabecalho2> {
             selectedCategory = index;
             if (selectedCategory == 1) {
               selectedCategory = 1;
-              if (valor == "Desconectado do servidor MQTT") {
+              if (valor == "1") {
                 Navigator.popAndPushNamed(context, "painelhumidade");
               }
             } else if (selectedCategory == 2) {

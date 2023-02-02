@@ -10,6 +10,9 @@ import 'package:farmfitmobile/models/previsao_hora.dart';
 import 'package:flutter/foundation.dart';
 import 'package:farmfitmobile/pages/painelhumidade.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+
+String temperature = "temp";
 
 class painel extends StatelessWidget {
   @override
@@ -78,19 +81,24 @@ class conteudopainel extends StatelessWidget {
 Future<void> getWeather() async {
   try {
     final uri = Uri.parse(
-        "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=410e55f7cd4e665ba787426f0022ea6d");
+        "http://api.openweathermap.org/data/2.5/weather?q=Sorocaba&units=metric&appid=410e55f7cd4e665ba787426f0022ea6d");
     final response = await http.get(uri);
     if (response.statusCode == 200) {
       var data = json.decode(response.body);
-      var temperature = data["main"]["temp"];
-      print("A temperatura em Londres é de $temperature graus Celsius.");
+      temperature = data["main"]["temp"].toString();
+      print("A temperatura em Sorocaba é de $temperature graus Celsius.");
     } else {
       print("Erro ao obter dados do clima");
     }
   } catch (e) {
     print("Erro ao fazer a requisição: $e");
   }
+ 
+
 }
+
+
+
 
 int? test = 0;
 
@@ -130,9 +138,9 @@ class _cabecalhoState extends State<cabecalho> {
             selectedCategory = index;
             if (selectedCategory == 1) {
               selectedCategory = 1;
-              if (valor == "Desconectado do servidor MQTT") {
+              
                 Navigator.popAndPushNamed(context, "painelhumidade");
-              }
+             
             } else if (selectedCategory == 2) {
               Navigator.popAndPushNamed(context, "/");
             } else {
@@ -183,6 +191,7 @@ class _dadosState extends State<dados> {
     super.initState();
     PrevisaoService service = PrevisaoService();
     ultimasPrevisoes = service.recuperarUltimasPrevisoes();
+    getWeather();
   }
 
   @override
@@ -209,11 +218,38 @@ class _dadosState extends State<dados> {
             ],
           ),
           Padding(padding: EdgeInsets.all(10)),
+          Text(
+            "A temperatura atual de Sorocaba é de:",
+            style: TextStyle(
+              fontSize: 19,
+              fontFamily: 'Inter',
+              color: Colors.black,
+            ),
+          ),
+          Container(
+            height: 40,
+            width: 100,
+            child: Center(
+              child: Text(
+                "$temperature ºC",
+                style: TextStyle(
+                  fontSize: 19,
+                  fontFamily: 'Inter',
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+          ),
           Container(child: ProximasTemperaturas(previsoes: ultimasPrevisoes)),
         ],
       ),
     );
   }
+
+
+
+
 }
 
 class appbar extends StatefulWidget {
@@ -249,7 +285,7 @@ class _appbarState extends State<appbar> {
                 onPressed: () {
                   Navigator.popAndPushNamed(context, "painel");
                 },
-                icon: Icons.analytics_outlined,
+                icon: Icons.analytics,
                 text: 'Painel',
               ),
               GButton(

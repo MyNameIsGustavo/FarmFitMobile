@@ -38,7 +38,7 @@ class conteudopagina1 extends StatelessWidget {
             ),
           ],
         ),
-        Padding(padding: EdgeInsets.all(15)),
+        Padding(padding: EdgeInsets.all(5)),
         Container(
           height: 120,
           width: 170,
@@ -59,13 +59,12 @@ class conteudopagina1 extends StatelessWidget {
             "   O nosso projeto tem como propósito ajudar os pequenos agricultores, através da capitação da água de chuva e automatizar a irrigação conforme a humidade do solo de suas plantações. Através disso, o agricultor poderá observar diversos tipos de dados neste aplicativo, como a humidade do solo de sua plantação e clima da região.",
             textAlign: TextAlign.justify,
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 19,
               fontFamily: 'Inter',
               color: Colors.white,
             ),
           ),
         ),
-        Padding(padding: EdgeInsets.all(10)),
         Container(
           height: 220,
           width: 350,
@@ -118,7 +117,7 @@ class _appbarState extends State<appbar> {
                 onPressed: () {
                   Navigator.popAndPushNamed(context, "painel");
                 },
-                icon: Icons.analytics_outlined,
+                icon: Icons.analytics,
                 text: 'Painel',
               ),
               GButton(
