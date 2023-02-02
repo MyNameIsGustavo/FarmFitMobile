@@ -19,7 +19,7 @@ class conteudotime extends StatelessWidget {
         Padding(padding: EdgeInsets.all(10)),
         Container(
           child: Text(
-            "Nosso time!",
+            "Nosso time !",
             style: TextStyle(
                 fontSize: 25,
                 fontFamily: 'Inter',
