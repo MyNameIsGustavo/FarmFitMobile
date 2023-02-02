@@ -129,9 +129,9 @@ class _dados2State extends State<dados2> {
           Padding(padding: EdgeInsets.all(60)),
           Container(
             child: Text(
-              "Humidade $valor %",
+              "Umidade $valor %",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 19,
                 color: Colors.black,
                 fontFamily: 'Inter',
               ),
@@ -143,18 +143,43 @@ class _dados2State extends State<dados2> {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black),
               borderRadius: BorderRadius.circular(20),
-              color: int.parse(valor) < 75
+              color: int.parse(valor) < 20 || int.parse(valor) > 60
                   ? Colors.red
-                  : int.parse(valor) > 75
+                  : int.parse(valor) > 20 || int.parse(valor) < 60
                       ? Colors.green
                       : Colors.grey,
             ),
           ),
+          Padding(padding: EdgeInsets.all(60)),
+          Text(
+            "LEGENDA:",
+            textAlign: TextAlign.justify,
+            style: TextStyle(
+              fontSize: 19,
+              fontFamily: 'Inter',
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            "Cor vermelha = UMIDADE NÃO IDEAL",
+            textAlign: TextAlign.justify,
+            style: TextStyle(
+              fontSize: 19,
+              fontFamily: 'Inter',
+              color: Colors.black,
+            ),
+          ),
           Padding(padding: EdgeInsets.all(2)),
-          Text("Cor vermelha = HUMIDADE BAIXA"),
+          Text(
+            "Cor verde = UMIDADE IDEAL",
+            textAlign: TextAlign.justify,
+            style: TextStyle(
+              fontSize: 19,
+              fontFamily: 'Inter',
+              color: Colors.black,
+            ),
+          ),
           Padding(padding: EdgeInsets.all(2)),
-          Text("Cor verde = HUMIDADE ALTA"),
-          Padding(padding: EdgeInsets.all(80)),
           Container(
             height: 50,
             width: 100,
