@@ -126,9 +126,17 @@ class _dados2State extends State<dados2> {
                 });
               }),
               */
-
-          Text("$valor"),
-          Padding(padding: EdgeInsets.all(10)),
+          Padding(padding: EdgeInsets.all(40)),
+          Container(
+              child: Text(
+            "$valor",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.black,
+              fontFamily: 'Inter',
+            ),
+          )),
+          Padding(padding: EdgeInsets.all(130)),
           Container(
             height: 70,
             width: 300,
@@ -138,7 +146,9 @@ class _dados2State extends State<dados2> {
             ),
             child: TextButton(
               onPressed: (() {
-                Navigator.popAndPushNamed(context, "painelhumidade");
+                if (valor == "Desconectado do servidor MQTT") {
+                  Navigator.popAndPushNamed(context, "painelhumidade");
+                }
               }),
               child: Text(
                 "Clique aqui, caso servidor esteja fora do ar",
@@ -375,6 +385,9 @@ class _appbar2State extends State<appbar2> {
               GButton(
                 icon: Icons.group,
                 text: 'Time',
+                onPressed: () {
+                  Navigator.popAndPushNamed(context, "time");
+                },
               ),
             ],
             selectedIndex: 1,
@@ -405,7 +418,7 @@ class cabecalho2 extends StatefulWidget {
 class _cabecalho2State extends State<cabecalho2> {
   int? selectedCategory = 1;
 
-  List<String> categories = ["Clima", "Umidade do solo", "Coming soon"];
+  List<String> categories = ["Clima", "Umidade do solo"];
 
   @override
   Widget build(BuildContext context) {
@@ -431,7 +444,9 @@ class _cabecalho2State extends State<cabecalho2> {
             selectedCategory = index;
             if (selectedCategory == 1) {
               selectedCategory = 1;
-              Navigator.popAndPushNamed(context, "painelhumidade");
+              if (valor == "Desconectado do servidor MQTT") {
+                Navigator.popAndPushNamed(context, "painelhumidade");
+              }
             } else if (selectedCategory == 2) {
               Navigator.popAndPushNamed(context, "/");
             } else {

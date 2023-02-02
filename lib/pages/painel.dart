@@ -104,7 +104,7 @@ class cabecalho extends StatefulWidget {
 class _cabecalhoState extends State<cabecalho> {
   int? selectedCategory = 0;
 
-  List<String> categories = ["Clima", "Umidade do solo", "Coming soon"];
+  List<String> categories = ["Clima", "Umidade do solo"];
 
   @override
   Widget build(BuildContext context) {
@@ -130,8 +130,9 @@ class _cabecalhoState extends State<cabecalho> {
             selectedCategory = index;
             if (selectedCategory == 1) {
               selectedCategory = 1;
-              Navigator.popAndPushNamed(context, "painelhumidade");
-              
+              if (valor == "Desconectado do servidor MQTT") {
+                Navigator.popAndPushNamed(context, "painelhumidade");
+              }
             } else if (selectedCategory == 2) {
               Navigator.popAndPushNamed(context, "/");
             } else {
@@ -254,6 +255,9 @@ class _appbarState extends State<appbar> {
               GButton(
                 icon: Icons.group,
                 text: 'Time',
+                onPressed: () {
+                  Navigator.popAndPushNamed(context, "time");
+                },
               ),
             ],
             selectedIndex: 1,

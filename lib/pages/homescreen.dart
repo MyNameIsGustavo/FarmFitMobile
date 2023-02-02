@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:farmfitmobile/pages/contants.dart';
 import 'package:farmfitmobile/pages/proximas_temperaturas.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:flutter/material.dart';
@@ -39,36 +40,46 @@ class conteudopagina1 extends StatelessWidget {
         ),
         Padding(padding: EdgeInsets.all(15)),
         Container(
-          height: 188,
-          width: 252,
+          height: 120,
+          width: 170,
           decoration: BoxDecoration(
             color: Color(0xFF64B0FD),
             border: Border.all(color: Colors.black),
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
-<<<<<<< HEAD
-              
-=======
->>>>>>> e41e0ecea3e1cd7135fd6c7724c0be7cf8c38cb2
               image: AssetImage("images/logoFarmFit.png"),
+              fit: BoxFit.cover,
             ),
           ),
         ),
         Padding(padding: EdgeInsets.all(10)),
-        Center(
-          child: Container(
-            width: 320,
-            child: Text(
-              "   O nosso projeto tem como propósito ajudar os pequenos agricultores, através da capitação da água de chuva e automatizar a irrigação conforme a humidade do solo de suas plantações. Através disso, o agricultor poderá observar diversos tipos de dados neste aplicativo, como a humidade do solo de sua plantação e clima da região.",
-              textAlign: TextAlign.justify,
-              style: TextStyle(
-                fontSize: 19,
-                fontFamily: 'Inter',
-                color: Colors.white,
-              ),
+        Container(
+          width: 320,
+          child: Text(
+            "   O nosso projeto tem como propósito ajudar os pequenos agricultores, através da capitação da água de chuva e automatizar a irrigação conforme a humidade do solo de suas plantações. Através disso, o agricultor poderá observar diversos tipos de dados neste aplicativo, como a humidade do solo de sua plantação e clima da região.",
+            textAlign: TextAlign.justify,
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: 'Inter',
+              color: Colors.white,
             ),
           ),
-        )
+        ),
+        Padding(padding: EdgeInsets.all(10)),
+        Container(
+          height: 220,
+          width: 350,
+          margin: EdgeInsets.symmetric(
+              horizontal: kDefaultPadding, vertical: kDefaultPadding / 2),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+              image: AssetImage("images/maquete.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -113,6 +124,9 @@ class _appbarState extends State<appbar> {
               GButton(
                 icon: Icons.group,
                 text: 'Time',
+                onPressed: () {
+                  Navigator.popAndPushNamed(context, "time");
+                },
               ),
             ],
           ),
